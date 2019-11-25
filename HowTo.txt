@@ -1,0 +1,11 @@
+//Tworzymy apkę
+npx create-react-app storm --use-npm
+
+
+npm install react-bootstrap@0.33.0 --save
+
+npm install react-router-dom@5.0.1 --save
+
+//Włączenie apki
+npm start
+
