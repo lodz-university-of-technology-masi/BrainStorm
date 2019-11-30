@@ -47,12 +47,13 @@ class AdminView extends React.Component {
     render() {
         return (
             <ul>
+                Dostępne testy :
                 {list.map(item => {
                     return <li key={item}>{item}</li>;
                 })}
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Imię:
+                        Test:
                         <input type="text" value={this.state.value} onChange={this.handleChange}/>
                     </label>
                     <input type="submit" value="Wyślij"/>
