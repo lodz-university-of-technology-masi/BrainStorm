@@ -1,7 +1,71 @@
 import React from 'react';
 import './AdminView.css';
 
-const allUsers = ['TEST1','TEST2','TEST3'];
+const list = ['Test'];
+
+/*export default function AdminView() {
+    function handleSubmit(event) {
+        alert('Podano następujące imię: ' + this.state.value);
+        event.preventDefault();
+        //list.push(name)
+    }
+    return (<ul>
+        {list.map(item => {
+            return <li key={item}>{item}</li>;
+        })}
+        <form>
+            <label>
+                Imię:
+                <input type="text" name="name" onChange={handleSubmit}/>
+            </label>
+            <input type="submit" value="Dodaj"/>
+        </form>
+    </ul>)
+
+}*/
+
+class AdminView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        //alert('Podano następujące imię: ' + this.state.value);
+        list.push(this.state.value)
+        event.preventDefault();
+    }
+
+    //tutaj moze po prostu nie byc formularza tylko sam guzik do przejscia do tworzenia testu
+    render() {
+        return (
+            <ul>
+                {list.map(item => {
+                    return <li key={item}>{item}</li>;
+                })}
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Imię:
+                        <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                    </label>
+                    <input type="submit" value="Wyślij"/>
+                </form>
+            </ul>
+        );
+    }
+}
+
+export default AdminView;
+
+
+/*const allUsers = ['TEST1','TEST2','TEST3'];
 
 class AdminView extends React.Component {
     constructor() {
@@ -48,4 +112,4 @@ const UsersList = ({ users }) => {
 
 };
 
-export default AdminView;
+export default AdminView;*/
