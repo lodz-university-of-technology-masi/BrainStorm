@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './AdminView.css';
 
 const allUsers = ['TEST1','TEST2','TEST3'];
@@ -33,7 +32,7 @@ class AdminView extends React.Component {
 
 
     }}
-;
+
 
 const UsersList = ({ users }) => {
     if (users.length > 0) {
