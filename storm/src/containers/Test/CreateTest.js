@@ -17,6 +17,9 @@ class CreateTest extends React.Component {
             answers: [],
             data: this.props.location
         }
+        this.handleQuestion = this.handleQuestion.bind(this);
+        this.handleAnswer = this.handleAnswer.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleQuestion(event) {
