@@ -2,19 +2,22 @@ import React from 'react';
 import AdminView from "../AdminView";
 
 const test = []
+//const questions = []
+//const answers = []
+//const {data} = this.props.location
 
 //const data = []
 
 class CreateTest extends React.Component {
+
     constructor(props) {
         super(props);
-        //const {data} = this.props.location
         this.state = {
             name: "",
             questions: [],
+            answers: [],
             question: "",
             answer: "",
-            answers: [],
             data: this.props.location
         }
         this.handleQuestion = this.handleQuestion.bind(this);
@@ -35,12 +38,22 @@ class CreateTest extends React.Component {
             questions: this.state.questions.concat([this.state.question]),
             answers: this.state.answers.concat([this.state.answer])
         }))
+        //questions.push(this.state.question)
+        //answers.push(this.state.answer)
     }
 
     render() {
 
         return (
             <ul>
+                Pytania :
+                {this.state.questions.map(item => {
+                    return <li key={item}>{item}</li>;
+                })}
+                Odpowiedzi :
+                {this.state.answers.map(item => {
+                    return <li key={item}>{item}</li>;
+                })}
                 <form onSubmit={this.handleSubmit}>
                     <label>Dodaj pytanie :</label>
                     <td><input type="text" value={this.state.question} onChange={this.handleQuestion}/></td>
