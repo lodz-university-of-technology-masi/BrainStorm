@@ -1,7 +1,7 @@
 import React from 'react';
 import './AdminView.css';
 
-const list = ['Test'];
+const list = [];
 
 /*export default function AdminView() {
     function handleSubmit(event) {
@@ -29,12 +29,12 @@ class AdminView extends React.Component {
         super(props);
         this.state = {value: ''};
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
         this.routeChange = this.routeChange.bind(this);
     }
 
-    handleChange(event) {
+    /*handleChange(event) {
         this.setState({value: event.target.value});
     }
 
@@ -42,12 +42,15 @@ class AdminView extends React.Component {
         //alert('Podano następujące imię: ' + this.state.value);
         list.push(this.state.value)
         event.preventDefault();
-    }
+    }*/
 
     routeChange() {
-    let path = `/admin/createTest`;
-    this.props.history.push(path);
-  }
+        let path = `/admin/createTest`;
+        this.props.history.push({
+            pathname: path,
+            data: list // your data array of objects
+        });
+    }
 
     //tutaj moze po prostu nie byc formularza tylko sam guzik do przejscia do tworzenia testu
     render() {
@@ -57,13 +60,6 @@ class AdminView extends React.Component {
                 {list.map(item => {
                     return <li key={item}>{item}</li>;
                 })}
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Test:
-                        <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="Dodaj"/>
-                </form>
                 <button onClick={this.routeChange}>Stwórz test</button>
             </ul>
         );
