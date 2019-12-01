@@ -6,6 +6,7 @@ import Login from "./containers/Login";
 import AppliedRoute from "./components/AppliedRoute";
 import Signup from "./containers/Signup";
 import AdminView from "./containers/AdminView";
+import CreateTest from "./containers/CreateTest";
 
 export default function Routes({ appProps }) {
   return (

@@ -31,6 +31,7 @@ class AdminView extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.routeChange = this.routeChange.bind(this);
     }
 
     handleChange(event) {
@@ -42,6 +43,11 @@ class AdminView extends React.Component {
         list.push(this.state.value)
         event.preventDefault();
     }
+
+    routeChange() {
+    let path = `/admin/createTest`;
+    this.props.history.push(path);
+  }
 
     //tutaj moze po prostu nie byc formularza tylko sam guzik do przejscia do tworzenia testu
     render() {
@@ -56,8 +62,9 @@ class AdminView extends React.Component {
                         Test:
                         <input type="text" value={this.state.value} onChange={this.handleChange}/>
                     </label>
-                    <input type="submit" value="Wyślij"/>
+                    <input type="submit" value="Dodaj"/>
                 </form>
+                <button onClick={this.routeChange}>Stwórz test</button>
             </ul>
         );
     }
