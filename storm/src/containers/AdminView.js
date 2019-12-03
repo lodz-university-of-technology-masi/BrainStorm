@@ -1,7 +1,13 @@
 import React from 'react';
 import './AdminView.css';
+import { Link } from "react-router-dom";
 
 const list = [];
+var xmlHttp = new XMLHttpRequest()
+xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/a", false)	
+xmlHttp.setRequestHeader("Accept", "application/json")
+xmlHttp.send(null)
+const dane = JSON.parse(xmlHttp.response)
 
 /*export default function AdminView() {
     function handleSubmit(event) {
@@ -56,10 +62,26 @@ class AdminView extends React.Component {
     render() {
         return (
             <ul>
-                Dostępne testy :
-                {list.map(item => {
-                    return <li key={item}>{item}</li>;
-                })}
+                <h1>Dostępne testy </h1>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Dane kandydata</th>
+                        <th>Rodzaj testu</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    { dane.map((test) => {
+							return (
+								<tr>
+									<td><Link to={ "/admin/" + test.id }>{ test.candidate }</Link></td>
+									<td>{ test.title }</td>
+								</tr>
+							)
+						}) }
+                    </tbody>
+                </table>
+
                 <button onClick={this.routeChange}>Stwórz test</button>
             </ul>
         );
