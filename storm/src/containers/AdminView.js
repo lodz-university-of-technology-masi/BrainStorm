@@ -74,8 +74,13 @@ class AdminView extends React.Component {
                     { dane.map((test) => {
 							return (
 								<tr>
-									<td><Link to={ "/admin/" + test.id }>{ test.candidate }</Link></td>
+									<td><Link to={ "/test/" + test.id }>{ test.id }</Link></td>
 									<td>{ test.title }</td>
+                                    <td>
+                                   
+                                        <input type="submit" value="Usun" onClick={del(test.id)}/>
+                                     
+                                        </td>
 								</tr>
 							)
 						}) }
@@ -89,6 +94,14 @@ class AdminView extends React.Component {
 }
 
 export default AdminView;
+
+function del({id}){
+    console.log(id)
+    // var xmlHttp = new XMLHttpRequest()
+    // xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/delete/" + {id}, false)	
+    // xmlHttp.setRequestHeader("Accept", "application/json")
+    // xmlHttp.send(null)
+}
 
 
 /*const allUsers = ['TEST1','TEST2','TEST3'];

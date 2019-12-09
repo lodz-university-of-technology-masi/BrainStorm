@@ -10,12 +10,14 @@ const test = []
 
 class CreateTest extends React.Component {
 
+    
     constructor(props) {
         super(props);
         this.state = {
             name: "",
             questions: [],
-            answers: [],
+             answers: [],
+            //answers: "",
             question: "",
             answer: "",
             data: this.props.location
@@ -43,10 +45,8 @@ class CreateTest extends React.Component {
     }
 
     render() {
-
-        return (
-            <ul>
-                Pytania :
+       return ( <div>
+                           Pytania :
                 {this.state.questions.map(item => {
                     return <li key={item}>{item}</li>;
                 })}
@@ -61,8 +61,27 @@ class CreateTest extends React.Component {
                     <td><input type="text" value={this.state.answer} onChange={this.handleAnswer}/></td>
                     <input type="submit" value="Dodaj"/>
                 </form>
-            </ul>
-        );
+       </div>);
+
+        // return (
+        //     <ul>
+                // Pytania :
+                // {this.state.questions.map(item => {
+                //     return <li key={item}>{item}</li>;
+                // })}
+                // Odpowiedzi :
+                // {this.state.answers.map(item => {
+                //     return <li key={item}>{item}</li>;
+                // })}
+                // <form onSubmit={this.handleSubmit}>
+                //     <label>Dodaj pytanie :</label>
+                //     <td><input type="text" value={this.state.question} onChange={this.handleQuestion}/></td>
+                //     <label>Dodaj odpowiedz :</label>
+                //     <td><input type="text" value={this.state.answer} onChange={this.handleAnswer}/></td>
+                //     <input type="submit" value="Dodaj"/>
+                // </form>
+        //     </ul>
+        // );
     }
 }
 
