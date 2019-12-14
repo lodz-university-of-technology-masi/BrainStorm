@@ -1,37 +1,58 @@
 import React from "react"
 class Form extends React.Component {
   state = {
-    test: [{question:"", age:""}],
+    test: [{question:"", answer:""}],
+      author: "",
+      test_id: ""
   }
+
+  addQuestion = () => {
+    this.setState((prevState) => ({
+      test: [...prevState.test, {question:"", answer:""}],
+    }));
+  }
+
+  handleChange = (e) => {
+      if (["question", "answer"].includes(e.target.className) ) {
+    let test = [...this.state.test]
+    test[e.target.dataset.id][e.target.className] = e.target.value
+    this.setState({ test }, () => console.log(this.state.test))
+  } else {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+  }
+
+  handleSubmit = (event) => { event.preventDefault() }
+
   render() {
     let {test} = this.state
     return (
-      <form>
+      <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
         <label htmlFor="author">Author</label>
         <input type="text" name="author" id="author" />
         <label htmlFor="id">Test id</label>
         <input type="text" name="id" id="id" />
-        <p><button>Add new question</button></p>
+        <p><button onClick={this.addQuestion}>Add new question</button></p>
         {
           test.map((val, idx)=> {
-            let questionId = `cat-${idx}`, ageId = `age-${idx}`
+            let questionId = `Question - ${idx}`, answerId = `Answer - ${idx}`
             return (
               <div key={idx}>
-                <label htmlFor={questionId}>{`Cat #${idx + 1}`}</label>
+                <label htmlFor={questionId}>{`Question #${idx + 1}`}</label>
                 <input
                   type="text"
                   name={questionId}
                   data-id={idx}
                   id={questionId}
-                  className="name"
+                  className="question"
                 />
-                <label htmlFor={ageId}>Age</label>
+                <label htmlFor={answerId}>{`Answer #${idx + 1}`}</label>
                 <input
                   type="text"
-                  name={ageId}
+                  name={answerId}
                   data-id={idx}
-                  id={ageId}
-                  className="age"
+                  id={answerId}
+                  className="answer"
                 />
               </div>
             )
