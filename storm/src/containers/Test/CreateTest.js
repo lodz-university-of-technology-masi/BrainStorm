@@ -11,6 +11,7 @@ const test = []
 class CreateTest extends React.Component {
 
     
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -34,6 +35,7 @@ class CreateTest extends React.Component {
     handleAnswer(event) {
         this.setState({answer: event.target.value})
     }
+    
 
     handleSubmit() {
         this.setState(({

@@ -58,6 +58,25 @@ class AdminView extends React.Component {
         });
     }
 
+    add(){
+        var d = "{\"id\":\"11\",\"title\":\"test rekrutacyjny\"}"
+        var xmlHttp = new XMLHttpRequest()
+        xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/add", false)	
+        xmlHttp.setRequestHeader("Accept", "application/json")
+        //console.log(d)
+        xmlHttp.send(d)
+        window.location.reload()
+    }
+
+     del(id){
+        console.log(id)
+        var xmlHttp = new XMLHttpRequest()
+        xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/delete/" + id, false)	
+        xmlHttp.setRequestHeader("Accept", "application/json")
+        xmlHttp.send(null)
+        window.location.reload()
+    }
+
     //tutaj moze po prostu nie byc formularza tylko sam guzik do przejscia do tworzenia testu
     render() {
         return (
@@ -78,7 +97,7 @@ class AdminView extends React.Component {
 									<td>{ test.title }</td>
                                     <td>
                                    
-                                        <input type="submit" value="Usun" onClick={del(test.id)}/>
+                                        <input type="submit" value="Usun" onClick={() => this.del(test.id)}/>
                                      
                                         </td>
 								</tr>
@@ -88,6 +107,7 @@ class AdminView extends React.Component {
                 </table>
 
                 <button onClick={this.routeChange}>Stwórz test</button>
+                <button onClick={this.add}>Dodaj test</button>
             </ul>
         );
     }
@@ -95,13 +115,7 @@ class AdminView extends React.Component {
 
 export default AdminView;
 
-function del({id}){
-    console.log(id)
-    // var xmlHttp = new XMLHttpRequest()
-    // xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/delete/" + {id}, false)	
-    // xmlHttp.setRequestHeader("Accept", "application/json")
-    // xmlHttp.send(null)
-}
+
 
 
 /*const allUsers = ['TEST1','TEST2','TEST3'];
