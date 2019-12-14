@@ -2,23 +2,26 @@ package example;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 
 @DynamoDBTable(tableName="Question")
-public class Pytanie {
+public class Question {
 
     private String id;
 
     private String question;
-    private String answer;
+    private List<String> answer = new LinkedList<>();
     private String context;
-    public Pytanie(String id, String question, String answer, String context) {
+    public Question(String id, String question, List<String> answer, String context) {
         this.id = id;
         this.question = question;
         this.answer = answer;
         this.context = context;
     }
 
-    public Pytanie(){}
+    public Question(){}
 
 
 
@@ -43,11 +46,11 @@ public class Pytanie {
     }
 
     @DynamoDBAttribute(attributeName = "answer")
-    public String getAnswer() {
+    public List<String> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(List<String> answer) {
         this.answer = answer;
     }
 
@@ -60,19 +63,4 @@ public class Pytanie {
         this.context = context;
     }
 
-    public static Pytanie findQuestion(String id,DynamoDBMapper mapper){
-        Pytanie p = mapper.load(Pytanie.class, id);
-
-        return p;
-    }
-
-    public static void addQuestion(String id, String question, String answer, String context, DynamoDBMapper mapper){
-        Pytanie p = new Pytanie(id, question, answer, context);
-        mapper.save(p);
-    }
-
-    public static void deleteQuestion(String id, DynamoDBMapper mapper){
-        Pytanie p = findQuestion(id, mapper);
-        mapper.delete(p);
-    }
 }

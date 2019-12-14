@@ -11,11 +11,11 @@ public class Test {
     private String id;
     private String candidate;
     private String title;
-    private List<Pytanie> questions = new LinkedList<Pytanie>();
+    private List<Question> questions = new LinkedList<Question>();
 
     public Test(){}
 
-    public Test(String id, String candidate, String title, List<Pytanie> questions) {
+    public Test(String id, String candidate, String title, List<Question> questions) {
         this.id = id;
         this.candidate = candidate;
         this.title = title;
@@ -55,10 +55,10 @@ public class Test {
 
 
     @DynamoDBAttribute(attributeName="questions")
-    public List<Pytanie> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
-    public void setQuestions(List<Pytanie> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 
@@ -68,7 +68,7 @@ public class Test {
         return t;
     }
 
-    public static void addTest(String id,String author,String title,List<Pytanie> questions, DynamoDBMapper mapper){
+    public static void addTest(String id,String author,String title,List<Question> questions, DynamoDBMapper mapper){
         Test t = new Test(id, author,title,questions);
         mapper.save(t);
     }

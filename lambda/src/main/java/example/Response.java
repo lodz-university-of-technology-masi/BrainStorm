@@ -3,14 +3,14 @@ package example;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ApiGatewayResponse {
+public class Response {
 
     public int statusCode;
     public String body;
     public Map<String, String> headers;
     public final boolean isBase64Encoded = false;
 
-    public ApiGatewayResponse() {
+    public Response() {
         this.statusCode = 200;
         this.headers = new TreeMap<String, String>();
     }
