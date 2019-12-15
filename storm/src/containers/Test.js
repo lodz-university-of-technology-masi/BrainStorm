@@ -28,7 +28,11 @@ export default function Test(props)
                             <tr>
                             <td>{question.context} </td>
                             <td>{question.question}</td>
-                            <td>{question.answer}</td>
+                            <td>{question.answer.map((answ,idx)=>{
+                                return (
+                                    <td>{idx}.{answ}|</td>
+                                )
+                            })}</td>
                             </tr>
                         )
                     })}

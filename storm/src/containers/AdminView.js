@@ -2,6 +2,10 @@ import React from 'react';
 import './AdminView.css';
 import { Link } from "react-router-dom";
 
+
+
+   const test={ id:"55" , candidate:"can",title:"",questions:[{question:"cotam",answer:["jeden","dwa"],context:""}]}
+
 const list = [];
 var xmlHttp = new XMLHttpRequest()
 xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/a", false)	
@@ -59,12 +63,13 @@ class AdminView extends React.Component {
     }
 
     add(){
-        var d = "{\"id\":\"11\",\"title\":\"test rekrutacyjny\"}"
+        //var d = "{\"id\":\"11\",\"title\":\"test rekrutacyjny\"}"
+        var d = JSON.stringify(test)
         var xmlHttp = new XMLHttpRequest()
         xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/add", false)	
         xmlHttp.setRequestHeader("Accept", "application/json")
-        //console.log(d)
-        xmlHttp.send(d)
+        console.log(d)
+        //xmlHttp.send(d)
         window.location.reload()
     }
 
