@@ -1,90 +1,75 @@
-import React from 'react';
-import AdminView from "../AdminView";
+import React from "react"
 
-const test = []
-//const questions = []
-//const answers = []
-//const {data} = this.props.location
+class Form extends React.Component {
+    state = {
+        test: [{question: "", answer: ""}],
+        author: "",
+        test_id: ""
+    }
 
-//const data = []
+    addQuestion = () => {
+        this.setState((prevState) => ({
+            test: [...prevState.test, {question: "", answer: ""}],
+        }));
+    }
 
-class CreateTest extends React.Component {
-
-    
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-            questions: [],
-             answers: [],
-            //answers: "",
-            question: "",
-            answer: "",
-            data: this.props.location
+    handleChange = (e) => {
+        if (["question", "answer"].includes(e.target.className)) {
+            let test = [...this.state.test]
+            test[e.target.dataset.id][e.target.className] = e.target.value
+            this.setState({test}, () => console.log(this.state.test))
+        } else {
+            this.setState({[e.target.name]: e.target.value})
         }
-        this.handleQuestion = this.handleQuestion.bind(this);
-        this.handleAnswer = this.handleAnswer.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleQuestion(event) {
-        this.setState({question: event.target.value})
-    }
-
-    handleAnswer(event) {
-        this.setState({answer: event.target.value})
-    }
-    
-
-    handleSubmit() {
-        this.setState(({
-            questions: this.state.questions.concat([this.state.question]),
-            answers: this.state.answers.concat([this.state.answer])
-        }))
-        //questions.push(this.state.question)
-        //answers.push(this.state.answer)
+    handleSubmit = (event) => {
+        event.preventDefault()
     }
 
     render() {
-       return ( <div>
-                           Pytania :
-                {this.state.questions.map(item => {
-                    return <li key={item}>{item}</li>;
-                })}
-                Odpowiedzi :
-                {this.state.answers.map(item => {
-                    return <li key={item}>{item}</li>;
-                })}
-                <form onSubmit={this.handleSubmit}>
-                    <label>Dodaj pytanie :</label>
-                    <td><input type="text" value={this.state.question} onChange={this.handleQuestion}/></td>
-                    <label>Dodaj odpowiedz :</label>
-                    <td><input type="text" value={this.state.answer} onChange={this.handleAnswer}/></td>
-                    <input type="submit" value="Dodaj"/>
-                </form>
-       </div>);
-
-        // return (
-        //     <ul>
-                // Pytania :
-                // {this.state.questions.map(item => {
-                //     return <li key={item}>{item}</li>;
-                // })}
-                // Odpowiedzi :
-                // {this.state.answers.map(item => {
-                //     return <li key={item}>{item}</li>;
-                // })}
-                // <form onSubmit={this.handleSubmit}>
-                //     <label>Dodaj pytanie :</label>
-                //     <td><input type="text" value={this.state.question} onChange={this.handleQuestion}/></td>
-                //     <label>Dodaj odpowiedz :</label>
-                //     <td><input type="text" value={this.state.answer} onChange={this.handleAnswer}/></td>
-                //     <input type="submit" value="Dodaj"/>
-                // </form>
-        //     </ul>
-        // );
+        let {author, test_id, test} = this.state
+        return (
+            <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+                <label htmlFor="author">Author</label>
+                <input type="text" name="author" id="author" defaultValue={author}/>
+                <label htmlFor="test_id">Test id</label>
+                <input type="text" name="test_id" id="test_id" defaultValue={test_id}/>
+                <p>
+                    <button onClick={this.addQuestion}>Add new open question</button>
+                </p>
+                <p>
+                    <button>Add new closed question</button>
+                </p>
+                {
+                    test.map((val, idx) => {
+                        let questionId = `Question - ${idx}`, answerId = `Answer - ${idx}`
+                        return (
+                            <div key={idx}>
+                                <label htmlFor={questionId}>{`Question #${idx + 1}`}</label>
+                                <input
+                                    type="text"
+                                    name={questionId}
+                                    data-id={idx}
+                                    id={questionId}
+                                    className="question"
+                                />
+                                <label htmlFor={answerId}>{`Answer #${idx + 1}`}</label>
+                                <input
+                                    type="text"
+                                    name={answerId}
+                                    data-id={idx}
+                                    id={answerId}
+                                    className="answer"
+                                />
+                            </div>
+                        )
+                    })
+                }
+                <input type="submit" value="Submit"/>
+            </form>
+        )
     }
 }
 
-export default CreateTest;
+export default Form
