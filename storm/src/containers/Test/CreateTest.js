@@ -43,7 +43,7 @@ class Form extends React.Component {
                 </p>
                 {
                     test.map((val, idx) => {
-                        let questionId = `Question - ${idx}`, answerId = `Answer - ${idx}`
+                        let questionId = `Question - ${idx}`
                         return (
                             <div key={idx}>
                                 <label htmlFor={questionId}>{`Question #${idx + 1}`}</label>
@@ -53,14 +53,6 @@ class Form extends React.Component {
                                     data-id={idx}
                                     id={questionId}
                                     className="question"
-                                />
-                                <label htmlFor={answerId}>{`Answer #${idx + 1}`}</label>
-                                <input
-                                    type="text"
-                                    name={answerId}
-                                    data-id={idx}
-                                    id={answerId}
-                                    className="answer"
                                 />
                             </div>
                         )
