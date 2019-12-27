@@ -1,4 +1,5 @@
 import React from "react"
+import {Link} from "react-router-dom";
 
 class Form extends React.Component {
     state = {
@@ -108,6 +109,7 @@ class Form extends React.Component {
                     })
                 }
                 <button onClick={this.addToBase}>Dodaj</button>
+                <p><Link to={"/admin"}>Powrot</Link></p>
             </form>
 
 
