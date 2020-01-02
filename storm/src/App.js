@@ -31,9 +31,7 @@ function App(props) {
   }
   async function handleLogout() {
     await Auth.signOut();
-  
     userHasAuthenticated(false);
-    props.history.push("/login");
   }
 
   return (
@@ -67,4 +65,4 @@ function App(props) {
   );
 }
 
-export default withRouter(App);
+export default App;
