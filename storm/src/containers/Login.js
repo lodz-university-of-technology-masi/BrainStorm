@@ -20,10 +20,9 @@ export default function Login(props) {
     event.preventDefault();
 
     setIsLoading(true);
-
     try {
       await Auth.signIn(fields.email, fields.password);
-      //props.userHasAuthenticated(true);
+      props.userHasAuthenticated = true;
       props.history.push("/candidate");
     } catch (e) {
       alert(e.message);
