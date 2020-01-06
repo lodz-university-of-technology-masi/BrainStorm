@@ -18,7 +18,7 @@ export default function Candidate(props){
 return(
     <div>
         <h1>Dostępne testy </h1>
-                <table>
+                <table class="table" style={{backgroundColor: "lightgray"}}>
                     <thead>
                     <tr>
                         <th>Id testu</th>
