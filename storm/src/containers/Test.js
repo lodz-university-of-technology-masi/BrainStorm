@@ -1,5 +1,5 @@
 import React from 'react';
-import './Test.css';
+import styles from './Test.css';
 import {Link} from "react-router-dom";
 
 export default function Test(props)
@@ -16,8 +16,8 @@ export default function Test(props)
             <p>Identyfikator testu:{dane.id}</p>
             <p>Kandydat: {dane.candidate}</p>
             <p>Nazwa testu:{dane.title}</p>
-        <h3>Pytania</h3>
-        <table class = "table">
+        <h3 class = "name">Pytania</h3>
+        <table class = "table" style={{backgroundColor: "lightgray"}}>
             <thead>
                 <tr>
                     <th>Nr</th>
@@ -33,7 +33,7 @@ export default function Test(props)
                             <td>{question.question}</td>
                             <td>{question.answer.map((answ,idx)=>{
                                 return (
-                                    <td>{idx}.{answ}|</td>
+                                    <td>{answ}|</td>
                                 )
                             })}</td>
                             </tr>
