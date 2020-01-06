@@ -10,6 +10,8 @@ import CreateTest from "./containers/Test/CreateTest";
 import Test from "./containers/Test";
 import Candidate from "./containers/Candidate";
 import CandidateView from "./containers/CandidateView";
+import Candidates from "./containers/Candidates";
+import AddCandidate from "./containers/AddCandidate";
 import SolveTest from "./containers/SolveTest";
 //import addTest from "./containers/Test/addTest";
 
@@ -21,6 +23,8 @@ export default function Routes({ appProps }) {
       <Route path="/admin" exact component={AdminView} appProps={appProps} />
       <Route path="/test/:id" exact component={Test} />
       <Route path="/candidate" exact component={CandidateView} />
+      <Route path="/candidates" exact component={Candidates} />
+      <Route path="/candidates/add" exact component={AddCandidate} />
       <Route path="/ctest/:can" exact component={Candidate} />
       <Route path="/candidate/solve/:id" exact component={SolveTest} />
       <Route Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />

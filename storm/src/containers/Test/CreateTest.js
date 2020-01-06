@@ -1,10 +1,11 @@
 import React from "react"
 import {Link} from "react-router-dom";
+import CSVReader from 'react-csv-reader';
 
 class Form extends React.Component {
     state = {
         test: [],
-        author: "",
+        candidate: "",
         test_id: ""
     }
 
@@ -41,7 +42,7 @@ class Form extends React.Component {
     addToBase = () => {
         const test = {id: "", candidate: "", title: "test rekrutacyjny", questions: []}
         test.id = this.state.test_id
-        test.candidate = this.state.author
+        test.candidate = this.state.candidate
         this.state.test.map((t, idx) => {
             var w = {id: "" + idx, question: t.question, answer: t.answer, context: "Pytanie" + idx + 1}
             test.questions.push(w)
@@ -58,12 +59,33 @@ class Form extends React.Component {
 
     }
 
+    readFile = (data) => {
+        this.setState({})
+        this.state.test_id = data[0][0]
+        this.state.candidate = data[1][0]
+        for (let i = 2; i < data.length; i++) {
+            if (data[i][0] === 'O') {
+                this.state.test.push({question: data[i][1], answer: [" "]})
+            } else {
+                let answr = []
+                for(let j = 2; j < data[i].length; j++){
+                    answr.push(data[i][j])
+                }
+                this.state.test.push({question: data[i][1], answer: answr})
+            }
+        }
+        //console.log(this.state)
+        //console.log(this.state.test_id)
+        //console.log(this.state.candidate)
+        //console.log(data)
+    }
+
     render() {
-        let {author, test_id, test} = this.state
+        let {candidate, test_id, test} = this.state
         return (
             <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                 <label htmlFor="author">Kandydat</label>
-                <input type="text" name="author" id="author" defaultValue={author}/>
+                <input type="text" name="author" id="author" defaultValue={candidate}/>
                 <label htmlFor="test_id">Test id</label>
                 <input type="text" name="test_id" id="test_id" defaultValue={test_id}/>
                 <p>
@@ -109,10 +131,10 @@ class Form extends React.Component {
                     })
                 }
                 <button onClick={this.addToBase}>Dodaj</button>
+                <p>Importuj plik z testem</p>
+                <CSVReader onFileLoaded={data => this.readFile(data)}/>
                 <p><Link to={"/admin"}>Powrot</Link></p>
             </form>
-
-
         )
     }
 }
