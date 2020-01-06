@@ -25,6 +25,10 @@ export default function Routes({ appProps }) {
       <Route path="/candidate/solve/:id" exact component={SolveTest} />
       <Route Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />
       <AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
+
+
+
+
       <Route component={NotFound} /> { /* Finally, catch all unmatched routes */ }
     </Switch>
   );

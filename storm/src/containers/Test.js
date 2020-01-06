@@ -13,9 +13,11 @@ export default function Test(props)
     return (
         <div>
         <h1>Test</h1>
-        <div>Kandydat: {dane.candidate} Nazwa testu: {dane.title}</div>
+            <p>Identyfikator testu:{dane.id}</p>
+            <p>Kandydat: {dane.candidate}</p>
+            <p>Nazwa testu:{dane.title}</p>
         <h3>Pytania</h3>
-        <table>
+        <table class = "table">
             <thead>
                 <tr>
                     <th>Nr</th>
