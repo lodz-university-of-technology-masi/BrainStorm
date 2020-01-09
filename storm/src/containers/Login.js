@@ -168,12 +168,13 @@ export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
+    username: "",
     password: "",
     confirmationCode: ""
   });
 
   function validateForm() {
-    return fields.email.length > 0 && fields.password.length > 0;
+    return fields.password.length > 0;
   }
 
   async function handleSubmit(event) {
@@ -181,12 +182,13 @@ export default function Login(props) {
 
     setIsLoading(true);
     try {
-      let response = await Auth.signIn(fields.email, fields.password);
+      let response = await Auth.signIn(fields.username, fields.password);
      // let userType = response["attributes"]["email_verified"];
       props.userHasAuthenticated(true);
       Auth.currentAuthenticatedUser()
           .then(user => Auth.userAttributes(user))
           .then(attributes => console.log(attributes))
+          .then(user => console.log(user))
           .catch(err => alert(err));
      // if(userType){
       //   props.history.push("/admin");
@@ -208,12 +210,12 @@ export default function Login(props) {
   return (
       <div className="Login">
         <form onSubmit={handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+          <FormGroup controlId="username" bsSize="large">
+            <ControlLabel>Username</ControlLabel>
             <FormControl
                 autoFocus
-                type="email"
-                value={fields.email}
+                type="username"
+                value={fields.username}
                 onChange={handleFieldChange}
             />
           </FormGroup>
