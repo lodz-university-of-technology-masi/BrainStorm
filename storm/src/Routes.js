@@ -20,7 +20,7 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
       <AppliedRoute path="/admin" exact component={AdminView} appProps={appProps} />
       <AppliedRoute path="/test/:id" exact component={Test} appProps={appProps}/>
-      <AppliedRoute path="/candidate" exact component={CandidateView} appProps={appProps}/>
+      <AppliedRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
       <AppliedRoute path="/ctest/:can" exact component={Candidate} appProps={appProps}/>
       <AppliedRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
       <AppliedRoute Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />

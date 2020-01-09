@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import {Auth} from "aws-amplify";
+
 
 
 export default function Candidate(props){
@@ -12,6 +14,19 @@ export default function Candidate(props){
     const dane = JSON.parse(xmlHttp.response)
     console.log(dane)
 
+    async function checkIfAdmin(event){
+        event.preventDefault();
+        const user = await Auth.currentAuthenticatedUser();
+        try {
+            if (user.verifyAttribute({'custom:isRecruiter': '1'})) {
+                Auth.currentAuthenticatedUser()
+                    .then(user => console.log("jestes adminem"))
+            } else{}
+        }catch(e)
+        {
+            alert(e)
+        }
+    }
 
 
 
@@ -36,8 +51,9 @@ return(
 							)
 						}) }
                     </tbody>
-                </table>
 
+                </table>
+                <button onClick={checkIfAdmin}>Sprawdź swój status</button>
 
     </div>
 )

@@ -26,28 +26,35 @@ export default function Login(props) {
     setIsLoading(true);
     try {
       let response = await Auth.signIn(fields.username, fields.password);
-     // let userType = response["attributes"]["email_verified"];
+      const user = await Auth.currentAuthenticatedUser();
+      const result = await Auth.updateUserAttributes(user, {'custom:isRecruiter': '1'})
+
+      // let userType = response["attributes"]["email_verified"];
       props.userHasAuthenticated(true);
       Auth.currentAuthenticatedUser()
           .then(user => Auth.userAttributes(user))
           .then(attributes => console.log(attributes))
           .then(user => console.log(user))
           .catch(err => alert(err));
-     // if(userType){
-      //   props.history.push("/admin");
-      //   props.userIsCandidate(false);
-      // }
-      // else if(!userType){
+
+     // if (userType) {
+        //props.history.push("/admin");
+        //   props.userIsCandidate(false);
+        // }
+        // else if(!userType){
         props.history.push("/candidate");
-      //   props.userIsCandidate(true);
-      // }
-      
-    } catch (e) { // lapie tu ze nie jest potwierdzony klient
-      alert(e);
-      // props.history.push("/confirmationCode");
-      setIsLoading(false);
+        //   props.userIsCandidate(true);
+        // }
+
+      }catch
+      (e)
+      { // lapie tu ze nie jest potwierdzony klient
+        alert(e);
+        // props.history.push("/confirmationCode");
+        setIsLoading(false);
+      }
     }
-  }
+
 
 
   return (
@@ -75,6 +82,8 @@ export default function Login(props) {
           </LoaderButton>
         </form>
       </div>
+
+
   );
 
 
