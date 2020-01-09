@@ -18,22 +18,16 @@ import SolveTest from "./containers/SolveTest";
 export default function Routes({ appProps }) {
   return (
     <Switch>
-      <Route path="/" exact component={Home} appProps={appProps} />
-      <Route path="/login" exact component={Login} appProps={appProps} />
-      <Route path="/admin" exact component={AdminView} appProps={appProps} />
-      <Route path="/test/:id" exact component={Test} />
-      <Route path="/candidate" exact component={CandidateView} />
-      <Route path="/candidates" exact component={Candidates} />
-      <Route path="/candidates/add" exact component={AddCandidate} />
-      <Route path="/ctest/:can" exact component={Candidate} />
-      <Route path="/candidate/solve/:id" exact component={SolveTest} />
-      <Route Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />
-      <AppliedRoute path="/signup" exact component={Signup} appProps={appProps} />
-
-
-
-
-      <Route component={NotFound} /> { /* Finally, catch all unmatched routes */ }
+      <AppliedRoute path="/" exact component={Home} appProps={appProps} />
+      <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
+      <AppliedRoute path="/admin" exact component={AdminView} appProps={appProps} />
+      <AppliedRoute path="/test/:id" exact component={Test} appProps={appProps}/>
+      <AppliedRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
+      <AppliedRoute path="/candidates" exact component={Candidates} appProps={appProps}/>
+      <AppliedRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
+      <AppliedRoute path="/candidates/add" exact component={AddCandidate} appProps={appProps} />
+      <AppliedRoute Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />
+     <Route component={NotFound} /> { /* Finally, catch all unmatched routes */ }
     </Switch>
   );
 }

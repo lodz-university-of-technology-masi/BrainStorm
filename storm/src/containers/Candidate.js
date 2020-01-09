@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import {Auth} from "aws-amplify";
+
 
 
 export default function Candidate(props){
@@ -11,10 +13,16 @@ export default function Candidate(props){
     xmlHttp.send(null)
     const dane = JSON.parse(xmlHttp.response)
     console.log(dane)
-
-
-
-
+    async function becomeRecruiter(event) {
+        event.preventDefault();
+        try {
+            let user = await Auth.currentAuthenticatedUser();
+            props.userHasAuthenticated(true);
+            const result = await Auth.updateUserAttributes(user, {'custom:isRecruiter': '1'})
+        }catch(e){
+            alert(e)
+        }
+    }
 return(
     <div>
         <h1>Dostępne testy </h1>
@@ -36,8 +44,9 @@ return(
 							)
 						}) }
                     </tbody>
-                </table>
 
+                </table>
+                <button onClick={checkIfAdmin}>Sprawdź swój status</button>
 
     </div>
 )
