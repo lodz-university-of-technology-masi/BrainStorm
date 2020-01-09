@@ -147,7 +147,7 @@ import {Auth} from 'aws-amplify';
 function App(props) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
-  const [isCandidate, userIsCandidate] = useState(false);
+  const [isRecruiter, userIsRecruiter] = useState(false);
 
   useEffect(() => {
     onLoad();
@@ -185,45 +185,20 @@ function App(props) {
         <Navbar.Collapse >
         </Navbar.Collapse >
         <Nav pullLeft>
-          {((isCandidate == false) && (isAuthenticated == true)) ?//jestem rekruterem
+          {((isRecruiter == true) && (isAuthenticated == true)) ?//jestem rekruterem
               <>
-                {/* <DropdownButton id="dropdown-basic-button" title="Tests">
-                  <LinkContainer to={"/customerMenager"}>
-                    <NavItem>List tests</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to={"/addTest"}>
-                    <NavItem>Add test</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to={"/addTestToCandidate"}>
-                    <NavItem>Add test to candidate</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to={"/customerMenager"}>
-                    <NavItem>Import test</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to={"/customerMenager"}>
-                    <NavItem>Test to check</NavItem>
-                  </LinkContainer>
-                </DropdownButton>
-                <DropdownButton id="dropdown-basic-button" title="Candidate">
-                  <LinkContainer to={"/addCandidate"}>
-                    <NavItem>Add candidate</NavItem>
-                  </LinkContainer> */}
-
-                {/* </DropdownButton> */}
+                <LinkContainer to={"/admin"}>
+                  <NavItem></NavItem>
+                </LinkContainer>
               </>
               : null
           }
-          {((isCandidate == true) && (isAuthenticated == true)) ? //  jestem kandydatem
+          {((isRecruiter == false) && (isAuthenticated == true)) ? //  jestem kandydatem
               <>
                     <LinkContainer to={"/candidate"}>
-                      <NavItem>Candidate's home screen</NavItem>
+                      <NavItem></NavItem>
                     </LinkContainer>
-                    {/* <LinkContainer to={"/tests"}>
-                      <NavItem>Available tests</NavItem>
-                    </LinkContainer>
-                    <LinkContainer to={"/results"}>
-                      <NavItem>Check your results</NavItem>
-                    </LinkContainer> */}
+                  
               </>
               : null
           }
@@ -244,7 +219,7 @@ function App(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes appProps={{isAuthenticated,userHasAuthenticated,isCandidate,userIsCandidate}}/>
+      <Routes appProps={{isAuthenticated,userHasAuthenticated,isRecruiter,userIsRecruiter}}/>
     </div>
   );
 }

@@ -7,13 +7,11 @@ import LoaderButton from "../components/LoaderButton";
 import {useFormFields} from "../libs/hooksLib";
 
 export default function Login(props) {
-  const [newUser, setNewUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     username: "",
     password: "",
-    confirmationCode: ""
   });
 
   function validateForm() {
@@ -33,11 +31,12 @@ export default function Login(props) {
 
      if (userType == 1) {
           props.history.push("/admin");
+          props.userIsRecruiter(true);
       }
       else {
         props.history.push("/candidate");
+        props.userIsRecruiter(false);
       }
-
       }catch
       (e)
       { // lapie tu ze nie jest potwierdzony klient
