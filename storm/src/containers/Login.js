@@ -26,25 +26,17 @@ export default function Login(props) {
     setIsLoading(true);
     try {
       let response = await Auth.signIn(fields.username, fields.password);
-      const user = await Auth.currentAuthenticatedUser();
-      const result = await Auth.updateUserAttributes(user, {'custom:isRecruiter': '1'})
 
-      // let userType = response["attributes"]["email_verified"];
+      let userType = response["attributes"]["custom:isRecruiter"];
+      console.log("userType " + userType);
       props.userHasAuthenticated(true);
-      Auth.currentAuthenticatedUser()
-          .then(user => Auth.userAttributes(user))
-          .then(attributes => console.log(attributes))
-          .then(user => console.log(user))
-          .catch(err => alert(err));
 
-     // if (userType) {
-        //props.history.push("/admin");
-        //   props.userIsCandidate(false);
-        // }
-        // else if(!userType){
+     if (userType == 1) {
+          props.history.push("/admin");
+      }
+      else {
         props.history.push("/candidate");
-        //   props.userIsCandidate(true);
-        // }
+      }
 
       }catch
       (e)
