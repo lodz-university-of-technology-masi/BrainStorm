@@ -148,7 +148,7 @@ function App(props) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isRecruiter, userIsRecruiter] = useState(false);
-
+ 
   useEffect(() => {
     onLoad();
   }, []);

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import {Auth} from "aws-amplify";
-
+import config from "../config.js";
 
 
 export default function Candidate(props){
 
 
     var xmlHttp = new XMLHttpRequest()
-    xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + props.match.params.can, false)	
+    xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + config.currentUsername, false)	
     xmlHttp.setRequestHeader("Accept", "application/json")
     xmlHttp.send(null)
     const dane = JSON.parse(xmlHttp.response)
@@ -46,7 +46,7 @@ return(
                     </tbody>
 
                 </table>
-                <button onClick={checkIfAdmin}>Sprawdź swój status</button>
+                 <button onClick={becomeRecruiter}>Sprawdź swój status</button> 
 
     </div>
 )
