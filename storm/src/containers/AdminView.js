@@ -1,6 +1,7 @@
 import React from 'react';
 import './AdminView.css';
 import { Link } from "react-router-dom";
+import config from "../config.js";
 
 
 
@@ -59,6 +60,7 @@ class AdminView extends React.Component {
                     <tr>
                         <th>Dane kandydata</th>
                         <th>Rodzaj testu</th>
+                        <th>Edytuj</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -72,6 +74,7 @@ class AdminView extends React.Component {
                                         <input type="submit" value="Usun" onClick={() => this.del(test.id)}/>
                                      
                                         </td>
+                                        <td><Link to={ "/test/edit/" + test.id }>Edytuj</Link></td>
 								</tr>
 							)
 						}) }

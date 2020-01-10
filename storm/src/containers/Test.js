@@ -10,6 +10,16 @@ export default function Test(props)
     xmlHttp.send(null)
     const dane = JSON.parse(xmlHttp.response)
 
+    // dane.candidate = "Edycja"
+    // var d = JSON.stringify(dane)
+    // var xmlHttp = new XMLHttpRequest()
+    // xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/add", false)
+    // xmlHttp.setRequestHeader("Accept", "application/json")
+    // console.log(d)
+    // xmlHttp.send(d)
+
+
+
     return (
         <div>
         <h1>Test</h1>

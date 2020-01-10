@@ -8,11 +8,11 @@ export default function Candidate(props){
 
 
     var xmlHttp = new XMLHttpRequest()
+    console.log(config.currentUsername)
     xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + config.currentUsername, false)	
     xmlHttp.setRequestHeader("Accept", "application/json")
     xmlHttp.send(null)
     const dane = JSON.parse(xmlHttp.response)
-    console.log(dane)
     async function becomeRecruiter(event) {
         event.preventDefault();
         try {

@@ -13,6 +13,7 @@ import CandidateView from "./containers/CandidateView";
 import Candidates from "./containers/Candidates";
 import AddCandidate from "./containers/AddCandidate";
 import SolveTest from "./containers/SolveTest";
+import EditTest from "./containers/EditTest";
 //import addTest from "./containers/Test/addTest";
 
 export default function Routes({ appProps }) {
@@ -22,6 +23,7 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
       <AppliedRoute path="/admin" exact component={AdminView} appProps={appProps} />
       <AppliedRoute path="/test/:id" exact component={Test} appProps={appProps}/>
+      <AppliedRoute path="/test/edit/:id" exact component={EditTest} appProps={appProps}/>
       <AppliedRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
       <AppliedRoute path="/candidates" exact component={Candidates} appProps={appProps}/>
       <AppliedRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
