@@ -68,14 +68,37 @@ public class TestHandler {
         }
     }
 
+    public Response s(Map<String, Object> input, Context context) throws JsonProcessingException {
+
+        Response res = new Response();
+        Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
+        res.body = (String)params.get("candidate");
+        String candidate = (String)params.get("candidate");
+        DynamoDBScanExpression exp = new DynamoDBScanExpression();
+        List<Test> test = mapper.scan(Test.class, exp);
+        List<Test> candidateTests = new LinkedList<>();
+        for (Test t  : test) {
+            if(t.getCandidate() != null){
+                if(t.getCandidate().equals(candidate)){
+                    candidateTests.add(t);
+                }
+            }
+        }
+        res.body = objmapper.writeValueAsString(candidateTests);
+        res.headers.put("Content-type", "application/json");
+        res.headers.put("Access-Control-Allow-Origin","*");
+        return res;
+    }
+
     public Response getCandidateTests(Map<String, Object> input, Context context) {
 
         Response res = new Response();
 
         try {
-            Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
-            objmapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-            String candidate = (String) params.get("candidate");
+//            Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
+//            objmapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//            String candidate = (String) params.get("candidate");
+            String candidate = (String)input.get("body");
 
             DynamoDBScanExpression exp = new DynamoDBScanExpression();
             List<Test> test = mapper.scan(Test.class, exp);
@@ -94,6 +117,11 @@ public class TestHandler {
             res.body = ex.getMessage();
             return res;
 
+        }
+        catch (NullPointerException ex){
+            res.body = input.toString();
+            res.body = (String)input.get("pathParameters");
+            return res;
         }
     }
 

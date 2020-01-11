@@ -12,14 +12,18 @@ public class Test {
     private String candidate;
     private String title;
     private List<Question> questions = new LinkedList<Question>();
+    private String points;
+
+
 
     public Test(){}
 
-    public Test(String id, String candidate, String title, List<Question> questions) {
+    public Test(String id, String candidate, String title, List<Question> questions,String points) {
         this.id = id;
         this.candidate = candidate;
         this.title = title;
         this.questions = questions;
+        this.points = points;
     }
 //
 //    public Test(String id, String candidate, List<Pytanie> questions) {
@@ -35,6 +39,14 @@ public class Test {
     }
     public void setId(String id) {
         this.id = id;
+    }
+
+    @DynamoDBAttribute(attributeName="points")
+    public String getPoints() {
+        return points;
+    }
+    public void setPoints(String points) {
+        this.points = points;
     }
 
     @DynamoDBAttribute(attributeName="candidate")
@@ -68,10 +80,7 @@ public class Test {
         return t;
     }
 
-    public static void addTest(String id,String author,String title,List<Question> questions, DynamoDBMapper mapper){
-        Test t = new Test(id, author,title,questions);
-        mapper.save(t);
-    }
+//
 
     public static void deleteTest(String id, DynamoDBMapper mapper){
         Test t = findTest(id, mapper);

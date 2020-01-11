@@ -1,17 +1,19 @@
 package example;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+
 public class User {
 
     public User(){}
 
-    public User(String userName) {
-        this.userName = userName;
-    }
-
-    public User(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
+//    public User(String userName) {
+//        this.userName = userName;
+//    }
+//
+//    public User(String userName, String password) {
+//        this.userName = userName;
+//        this.password = password;
+//    }
 
     public User(String userName, String email, String password) {
         this.userName = userName;
@@ -38,6 +40,7 @@ public class User {
     private String userName;
     private String email;
     private String password;
+
 
     public String getPassword() {
         return password;
