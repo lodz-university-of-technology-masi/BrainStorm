@@ -14,6 +14,7 @@ import Candidates from "./containers/Candidates";
 import AddCandidate from "./containers/AddCandidate";
 import SolveTest from "./containers/SolveTest";
 import EditTest from "./containers/EditTest";
+import Rate from "./containers/Rate";
 //import addTest from "./containers/Test/addTest";
 
 export default function Routes({ appProps }) {
@@ -27,6 +28,7 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
       <AppliedRoute path="/candidates" exact component={Candidates} appProps={appProps}/>
       <AppliedRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
+      <AppliedRoute path="/candidate/rate/:id" exact component={Rate} appProps={appProps}/>
       <AppliedRoute path="/candidates/add" exact component={AddCandidate} appProps={appProps} />
       <AppliedRoute Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />
      <Route component={NotFound} /> { /* Finally, catch all unmatched routes */ }

@@ -40,7 +40,7 @@ class Form extends React.Component {
     }
 
     addToBase = () => {
-        const test = {id: "", candidate: "", title: "test rekrutacyjny", questions: []}
+        const test = {id: "", candidate: "",points:"-1", title: "test rekrutacyjny", questions: []}
         test.id = this.state.test_id
         test.candidate = this.state.candidate
         this.state.test.map((t, idx) => {
@@ -85,7 +85,7 @@ class Form extends React.Component {
         return (
             <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                 <label htmlFor="author">Kandydat</label>
-                <input type="text" name="author" id="author" defaultValue={candidate}/>
+                <input type="text" name="author" id="author" defaultValue={candidate} onChange={e => this.state.candidate = e.target.value}/>
                 <label htmlFor="test_id">Test id</label>
                 <input type="text" name="test_id" id="test_id" defaultValue={test_id}/>
                 <p>

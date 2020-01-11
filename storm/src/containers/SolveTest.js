@@ -34,6 +34,7 @@ class SolveTest extends React.Component {
     }
 
     routeChange = () => {
+        this.state.dane.points = "-2"
         var d = JSON.stringify(this.state.dane)
         var xmlHttp = new XMLHttpRequest()
         xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/add", false)
@@ -41,7 +42,7 @@ class SolveTest extends React.Component {
         console.log(d)
         xmlHttp.send(d)
 
-        let path = `/ctest/` + this.state.dane.candidate;
+        let path = `/candidate`;
         this.props.history.push({
             pathname: path,
 
