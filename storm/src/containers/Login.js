@@ -24,25 +24,23 @@ export default function Login(props) {
 
     setIsLoading(true);
     try {
-      let response = await Auth.signIn(fields.username, fields.password);
+        let response = await Auth.signIn(fields.username, fields.password);
 
-      let userType = response["attributes"]["custom:isRecruiter"];
-      console.log("userType " + userType);
-      props.userHasAuthenticated(true);
-      config.currentUsername = fields.username;
-     if (userType == 1) {
-          props.history.push("/admin");
-          props.userIsRecruiter(true);
-      }
-      else {
-        props.history.push("/candidate");
-        props.userIsRecruiter(false);
-      }
-      }catch
-      (e)
-      { // lapie tu ze nie jest potwierdzony klient
+        let userType = response["attributes"]["custom:isRecruiter"];
+        console.log("userType " + userType);
+        props.userHasAuthenticated(true);
+        config.currentUsername = fields.username;
+        if (userType == 1) {
+            props.history.push("/admin");
+            props.userIsRecruiter(true);
+        }
+        else {
+          props.history.push("/candidate");
+          props.userIsRecruiter(false);
+        }
+      } catch(e)
+      { 
         alert(e);
-        // props.history.push("/confirmationCode");
         setIsLoading(false);
       }
     }

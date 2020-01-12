@@ -3,28 +3,38 @@ import { Link } from "react-router-dom";
 import {Auth} from "aws-amplify";
 import config from "../config.js";
 
-
+let USERNAME = "start";
 export default function Candidate(props){
 
 
-    var xmlHttp = new XMLHttpRequest()
-    console.log(config.currentUsername)
-    xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + "rutek", false)
-    //xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + config.currentUsername, false)	
-    xmlHttp.setRequestHeader("Accept", "application/json")
-    xmlHttp.send(null)
-    const dane = JSON.parse(xmlHttp.response)
-    const ifer =[""]
-    async function becomeRecruiter(event) {
-        event.preventDefault();
-        try {
-            let user = await Auth.currentAuthenticatedUser();
-            props.userHasAuthenticated(true);
-            const result = await Auth.updateUserAttributes(user, {'custom:isRecruiter': '1'})
-        }catch(e){
-            alert(e)
-        }
-    }
+    var xmlHttp = new XMLHttpRequest();
+    
+    Auth.currentAuthenticatedUser().then(user => {
+        USERNAME = user.username;
+        console.log("ustawiony username: " + USERNAME);
+    }).catch(e => console.log(e));
+    // xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + "rutek", false);
+    xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + USERNAME, false);	
+    xmlHttp.setRequestHeader("Accept", "application/json");
+    xmlHttp.send(null);
+    const dane = JSON.parse(xmlHttp.response);
+    const ifer =[""];
+    // xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + "rutek", false);
+    // // xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + Auth.user.username, false);	
+    // xmlHttp.setRequestHeader("Accept", "application/json");
+    // xmlHttp.send(null);
+    // const dane = JSON.parse(xmlHttp.response);
+    // const ifer =[""];
+    // async function becomeRecruiter(event) {
+    //     event.preventDefault();
+    //     try {
+    //         let user = await Auth.currentAuthenticatedUser();
+    //         props.userHasAuthenticated(true);
+    //         const result = await Auth.updateUserAttributes(user, {'custom:isRecruiter': '1'});
+    //     }catch(e){
+    //         alert(e)
+    //     }
+    // }
 return(
     <div>   
         <h1>Dostępne testy </h1>
@@ -65,5 +75,14 @@ return(
 )
 
 
-
+async function becomeRecruiter(event) {
+    event.preventDefault();
+    try {
+        let user = await Auth.currentAuthenticatedUser();
+        props.userHasAuthenticated(true);
+        const result = await Auth.updateUserAttributes(user, {'custom:isRecruiter': '1'});
+    }catch(e){
+        alert(e)
+    }
+}
 }
