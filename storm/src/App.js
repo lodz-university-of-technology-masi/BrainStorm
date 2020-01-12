@@ -45,7 +45,7 @@ function App(props) {
           <Navbar.Toggle />
         </Navbar.Header>
         <Nav pullRight>
-          {((isRecruiter == true) && (isAuthenticated == true)) ?//jestem rekruterem
+          {((isRecruiter === true) && (isAuthenticated === true)) ?//jestem rekruterem
               <>
                 <LinkContainer to={"/admin"}>
                   <NavItem></NavItem>
@@ -53,7 +53,7 @@ function App(props) {
               </>
               : null
           }
-          {((isRecruiter == false) && (isAuthenticated == true)) ? //  jestem kandydatem
+          {((isRecruiter === false) && (isAuthenticated === true)) ? //  jestem kandydatem
               <>
                     <LinkContainer to={"/candidate"}>
                       <NavItem></NavItem>

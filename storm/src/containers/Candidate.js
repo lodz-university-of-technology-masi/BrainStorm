@@ -17,7 +17,7 @@ export default function Candidate(props){
     xmlHttp.setRequestHeader("Accept", "application/json");
     xmlHttp.send(null);
     const dane = JSON.parse(xmlHttp.response);
-    const ifer =[""];
+    // const ifer =[""];
 return(
     <div>   
         <h1>Dostępne testy </h1>
@@ -30,7 +30,7 @@ return(
                     </thead>
                     <tbody>
                     { dane.map((test) => {
-                        if(test.points == "-1"){
+                        if(test.points === "-1"){
 							return (
 								<tr>
 									<td>{ test.id }</td>
@@ -39,7 +39,7 @@ return(
 								</tr>
                             )
                         }
-                        else if(test.points != "-2"){
+                        else if(test.points !== "-2"){
                             return (
 								<tr>
 									<td>{ test.id }</td>

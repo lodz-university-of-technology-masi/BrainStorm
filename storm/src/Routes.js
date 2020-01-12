@@ -4,18 +4,15 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import AppliedRoute from "./components/AppliedRoute";
-import Signup from "./containers/Signup";
 import AdminView from "./containers/AdminView";
 import CreateTest from "./containers/Test/CreateTest";
 import Test from "./containers/Test";
 import Candidate from "./containers/Candidate";
-import CandidateView from "./containers/CandidateView";
 import Candidates from "./containers/Candidates";
 import AddCandidate from "./containers/AddCandidate";
 import SolveTest from "./containers/SolveTest";
 import EditTest from "./containers/EditTest";
 import Rate from "./containers/Rate";
-//import addTest from "./containers/Test/addTest";
 
 export default function Routes({ appProps }) {
   return (

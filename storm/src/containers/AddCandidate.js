@@ -1,7 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
-
-
 
 
 class AddCandidate extends React.Component {
@@ -31,7 +28,7 @@ class AddCandidate extends React.Component {
     }
 
     handleChange = (e) => {
-        if(e.target.type == "text"){
+        if(e.target.type === "text"){
             this.state.userName = e.target.value
         }
         else{

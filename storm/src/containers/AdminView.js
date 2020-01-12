@@ -1,11 +1,9 @@
 import React from 'react';
 import './AdminView.css';
 import { Link } from "react-router-dom";
-import config from "../config.js";
 
 
-
-   const test={ id:"55" , candidate:"can",title:"",questions:[{question:"cotam",answer:["jeden","dwa"],context:""}]}
+const test={ id:"55" , candidate:"can",title:"",questions:[{question:"cotam",answer:["jeden","dwa"],context:""}]}
 
 const list = [];
 var xmlHttp = new XMLHttpRequest()
