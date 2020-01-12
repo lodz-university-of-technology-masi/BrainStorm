@@ -5,7 +5,6 @@ import "./Login.css";
 import {Auth} from "aws-amplify";
 import LoaderButton from "../components/LoaderButton";
 import {useFormFields} from "../libs/hooksLib";
-import config from "../config.js";
 
 export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +28,6 @@ export default function Login(props) {
         let userType = response["attributes"]["custom:isRecruiter"];
         console.log("userType " + userType);
         props.userHasAuthenticated(true);
-        config.currentUsername = fields.username;
         if (userType == 1) {
             props.history.push("/admin");
             props.userIsRecruiter(true);
