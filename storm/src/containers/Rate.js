@@ -1,17 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-function ocen(dane){
-    var d = JSON.stringify(dane)
-    var xmlHttp = new XMLHttpRequest()
-    xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/add", false)
-    xmlHttp.setRequestHeader("Accept", "application/json")
-    console.log(d)
-    xmlHttp.send(d)
-
-}
-
-export default function Test(props)
+export default function Rate(props)
 {
     var xmlHttp = new XMLHttpRequest()
     xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/a/test/" + props.match.params.id, false)	
@@ -22,11 +12,10 @@ export default function Test(props)
 
     return (
         <div>
-        <h1>Test</h1>
-            <p>Identyfikator testu:{dane.id}</p>
+        <h1>Twój wynik to: {dane.points}</h1>
+            <p>Identyfikator testu: {dane.id}</p>
             <p>Kandydat: {dane.candidate}</p>
             <p>Nazwa testu:{dane.title}</p>
-            <p>Punkty: {dane.points}</p>
         <h3 class = "name">Pytania</h3>
         <table class = "table" style={{backgroundColor: "lightgray"}}>
             <thead>
@@ -50,15 +39,11 @@ export default function Test(props)
                             </tr>
                         )
                     })}
-                    <p><Link to={"/admin"}>Powrot</Link></p>
+                    <p><Link to={"/candidate"}>Powrot</Link></p>
                 </tbody>
 
             
         </table>
-        <p>Ocena: <form><input type="text" onChange={e => dane.points = e.target.value}></input>
-            <button onClick={()=> ocen(dane)}>Oceń</button>
-            </form>
-            </p>
         </div>
 
     );
