@@ -16,7 +16,7 @@ class AddCandidate extends React.Component {
         // console.log(user)
         xmlHttp.send(user)
 
-        let path = `/candidates` ;
+        let path = `/admin/candidates` ;
         this.props.history.push({
             pathname: path,
             
