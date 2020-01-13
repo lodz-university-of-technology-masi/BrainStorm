@@ -12,7 +12,14 @@ xmlHttp.setRequestHeader("Accept", "application/json")
 xmlHttp.send(null)
 const dane = JSON.parse(xmlHttp.response)
 
+var AWS = require('aws-sdk');
 
+var params = {SourceLanguageCode: 'pl', /* required */
+    TargetLanguageCode: 'en', /* required */
+    Text: {text}, /* required */
+};
+
+var text = 'dostepne testy'
 class AdminView extends React.Component {
     constructor(props) {
         super(props);
@@ -27,6 +34,14 @@ class AdminView extends React.Component {
         this.props.history.push({
             pathname: path,
             data: list // your data array of objects
+        });
+    }
+
+    translateIntoEnglish() {
+        var translate = new AWS.Translate();
+        translate.translateText(params, function (err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else console.log(data);           // successful response
         });
     }
 
@@ -61,7 +76,7 @@ class AdminView extends React.Component {
     render() {
         return (
             <ul>
-                <h1>Dostępne testy </h1>
+                <h1>{text} </h1>
                 <table>
                     <thead>
                     <tr>
@@ -91,6 +106,7 @@ class AdminView extends React.Component {
                 <button onClick={this.routeChange}>Stwórz test</button>
                 <td>
                 <button onClick={this.goToCandidatesPage}>Kandydaci</button>
+                    <button onClick={this.translateIntoEnglish}>translate</button>
                 </td>
             </ul>
         );

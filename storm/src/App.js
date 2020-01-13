@@ -5,6 +5,10 @@ import "./App.css";
 import Routes from "./Routes";
 import {LinkContainer} from "react-router-bootstrap";
 import {Auth} from 'aws-amplify';
+const key = "trnsl.1.1.20200113T191816Z.aea1e9f3a1dfea72.2d8e4599a45143e013c529aca26168c446aec475";
+
+var AWS = require('aws-sdk');
+
 
 function App(props) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -14,7 +18,8 @@ function App(props) {
   useEffect(() => {
     onLoad();
   }, []);
-  
+
+
   async function onLoad() {
     try {
       await Auth.currentSession();
@@ -42,8 +47,10 @@ function App(props) {
     userHasAuthenticated(false);
     userIsRecruiter(false);
   }
-  
+
+
   return (
+
     !isAuthenticating &&
     <div className="App container" >
       <Navbar fluid collapseOnSelect>
@@ -53,7 +60,7 @@ function App(props) {
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-        
+
         <Navbar.Collapse>
           <Nav pullRight>
           {isAuthenticated
@@ -61,6 +68,7 @@ function App(props) {
   : <>
       <LinkContainer to="/login">
         <NavItem>Log in</NavItem>
+
       </LinkContainer>
     </>
 }
@@ -69,6 +77,7 @@ function App(props) {
       </Navbar>
       <Routes appProps={{isAuthenticated,userHasAuthenticated,isRecruiter,userIsRecruiter}}/>
     </div>
+
   );
 }
 export default App;
