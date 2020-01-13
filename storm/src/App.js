@@ -18,6 +18,14 @@ function App(props) {
   async function onLoad() {
     try {
       await Auth.currentSession();
+      let response = await Auth.currentAuthenticatedUser();
+      let userType = response["attributes"]["custom:isRecruiter"];
+      if (userType == 1) {
+        userIsRecruiter(true);
+      }
+      else {
+        userIsRecruiter(false);
+      }
       userHasAuthenticated(true);
     }
     catch(e) {
@@ -32,6 +40,7 @@ function App(props) {
  async function handleLogout() {
     await Auth.signOut();
     userHasAuthenticated(false);
+    userIsRecruiter(false);
   }
   
   return (
