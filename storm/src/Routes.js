@@ -25,8 +25,7 @@ export default function Routes({ appProps }) {
       <AuthorizedRecruiterRoute path="/test/:id" exact component={Test} appProps={appProps}/>
       <AuthorizedRecruiterRoute path="/test/edit/:id" exact component={EditTest} appProps={appProps}/>
       <AuthorizedCandidateRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
-       {/* <AuthorizedRecruiterRoute path="/candidates" exact component={Candidates} appProps={appProps}/> */}
-      <AuthorizedRecruiterRoute Route exact path="/admin/candidates" component={(props) => <Candidates {...props}/>}/>
+       <AuthorizedRecruiterRoute path="/admin/candidates" exact component={Candidates} appProps={appProps}/>
       <AuthorizedCandidateRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
       <AuthorizedCandidateRoute path="/candidate/rate/:id" exact component={Rate} appProps={appProps}/>
       <AuthorizedRecruiterRoute path="/candidates/add" exact component={AddCandidate} appProps={appProps} />
