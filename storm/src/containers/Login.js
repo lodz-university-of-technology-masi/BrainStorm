@@ -28,12 +28,12 @@ export default function Login(props) {
         console.log("userType " + userType);
         props.userHasAuthenticated(true);
         if (userType == 1) {
-            props.history.push("/admin");
-            props.userIsRecruiter(true);
+          props.userIsRecruiter(true);
+          props.history.push("/admin");
         }
         else {
-          props.history.push("/candidate");
           props.userIsRecruiter(false);
+          props.history.push("/candidate"); 
         }
       } catch(e)
       { 

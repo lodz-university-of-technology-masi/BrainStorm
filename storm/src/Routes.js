@@ -5,6 +5,7 @@ import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import AppliedRoute from "./components/AppliedRoute";
 import AuthorizedRecruiterRoute from "./components/AuthorizedRecruiterRoute";
+import AuthorizedCandidateRoute from "./components/AuthorizedCandidateRoute";
 import AdminView from "./containers/AdminView";
 import CreateTest from "./containers/Test/CreateTest";
 import Test from "./containers/Test";
@@ -21,12 +22,12 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/" exact component={Home} appProps={appProps} />
       <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
       <AuthorizedRecruiterRoute path="/admin" exact component={AdminView} appProps={appProps} />
-      <AppliedRoute path="/test/:id" exact component={Test} appProps={appProps}/>
-      <AppliedRoute path="/test/edit/:id" exact component={EditTest} appProps={appProps}/>
-      <AppliedRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
+      <AuthorizedRecruiterRoute path="/test/:id" exact component={Test} appProps={appProps}/>
+      <AuthorizedRecruiterRoute path="/test/edit/:id" exact component={EditTest} appProps={appProps}/>
+      <AuthorizedCandidateRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
       <AuthorizedRecruiterRoute path="/candidates" exact component={Candidates} appProps={appProps}/>
-      <AuthorizedRecruiterRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
-      <AuthorizedRecruiterRoute path="/candidate/rate/:id" exact component={Rate} appProps={appProps}/>
+      <AuthorizedCandidateRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
+      <AuthorizedCandidateRoute path="/candidate/rate/:id" exact component={Rate} appProps={appProps}/>
       <AuthorizedRecruiterRoute path="/candidates/add" exact component={AddCandidate} appProps={appProps} />
       <AuthorizedRecruiterRoute Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />
      <Route component={NotFound} /> { /* Finally, catch all unmatched routes */ }
