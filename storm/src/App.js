@@ -18,6 +18,14 @@ function App(props) {
   async function onLoad() {
     try {
       await Auth.currentSession();
+      let response = await Auth.currentAuthenticatedUser();
+      let userType = response["attributes"]["custom:isRecruiter"];
+      if (userType == 1) {
+        userIsRecruiter(true);
+      }
+      else {
+        userIsRecruiter(false);
+      }
       userHasAuthenticated(true);
     }
     catch(e) {
@@ -32,6 +40,7 @@ function App(props) {
  async function handleLogout() {
     await Auth.signOut();
     userHasAuthenticated(false);
+    userIsRecruiter(false);
   }
   
   return (
@@ -44,25 +53,7 @@ function App(props) {
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-        <Nav pullRight>
-          {((isRecruiter === true) && (isAuthenticated === true)) ?//jestem rekruterem
-              <>
-                <LinkContainer to={"/admin"}>
-                  <NavItem></NavItem>
-                </LinkContainer>
-              </>
-              : null
-          }
-          {((isRecruiter === false) && (isAuthenticated === true)) ? //  jestem kandydatem
-              <>
-                    <LinkContainer to={"/candidate"}>
-                      <NavItem></NavItem>
-                    </LinkContainer>
-                  
-              </>
-              : null
-          }
-        </Nav>
+        
         <Navbar.Collapse>
           <Nav pullRight>
           {isAuthenticated
