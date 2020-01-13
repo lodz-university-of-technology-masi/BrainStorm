@@ -44,25 +44,7 @@ function App(props) {
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-        <Nav pullRight>
-          {((isRecruiter === true) && (isAuthenticated === true)) ?//jestem rekruterem
-              <>
-                <LinkContainer to={"/admin"}>
-                  <NavItem></NavItem>
-                </LinkContainer>
-              </>
-              : null
-          }
-          {((isRecruiter === false) && (isAuthenticated === true)) ? //  jestem kandydatem
-              <>
-                    <LinkContainer to={"/candidate"}>
-                      <NavItem></NavItem>
-                    </LinkContainer>
-                  
-              </>
-              : null
-          }
-        </Nav>
+        
         <Navbar.Collapse>
           <Nav pullRight>
           {isAuthenticated
