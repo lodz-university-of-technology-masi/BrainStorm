@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 
 class Candidates extends React.Component {
@@ -28,13 +29,12 @@ class Candidates extends React.Component {
 }
     
      routeChange(){
-        let path = `/candidates/add` ;
+        let path = `/admin/candidates/add` ;
         this.props.history.push({
             pathname: path,
             
         });
     }
-
 
 
 render(){
@@ -59,6 +59,8 @@ return(
 							)
 						}) }
                     </tbody>
+                    <td><Link to={"/admin"}>Powrot do strony domowej</Link></td>
+
                 </table>
 
     </div>

@@ -19,6 +19,7 @@ class AdminView extends React.Component {
         this.state = {value: ''};
 
         this.routeChange = this.routeChange.bind(this);
+        this.goToCandidatesPage = this.goToCandidatesPage.bind(this);
     }
 
     routeChange() {
@@ -26,6 +27,14 @@ class AdminView extends React.Component {
         this.props.history.push({
             pathname: path,
             data: list // your data array of objects
+        });
+    }
+
+    goToCandidatesPage(){
+        let path = `/admin/candidates`;
+        this.props.history.push({
+            pathname: path,
+            data: list
         });
     }
 
@@ -80,6 +89,9 @@ class AdminView extends React.Component {
                 </table>
 
                 <button onClick={this.routeChange}>Stwórz test</button>
+                <td>
+                <button onClick={this.goToCandidatesPage}>Kandydaci</button>
+                </td>
             </ul>
         );
     }
