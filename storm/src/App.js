@@ -5,9 +5,7 @@ import "./App.css";
 import Routes from "./Routes";
 import {LinkContainer} from "react-router-bootstrap";
 import {Auth} from 'aws-amplify';
-const key = "trnsl.1.1.20200113T191816Z.aea1e9f3a1dfea72.2d8e4599a45143e013c529aca26168c446aec475";
 
-var AWS = require('aws-sdk');
 
 
 function App(props) {

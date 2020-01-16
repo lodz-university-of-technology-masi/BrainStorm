@@ -23,7 +23,7 @@ class CandidateTests extends React.Component{
     return(
         <div>
             <h1>Dostępne testy </h1>
-                <table class="table" style={{backgroundColor: "lightgray"}}>
+                <table className="table" style={{backgroundColor: "lightgray"}}>
                     <thead>
                     <tr>
                         <th>Id testu</th>
