@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
+
+
 function ocen(dane){
     var d = JSON.stringify(dane)
     var xmlHttp = new XMLHttpRequest()
@@ -9,6 +11,13 @@ function ocen(dane){
     console.log(d)
     xmlHttp.send(d)
 
+}
+function translate(dane,lang){
+    var xmlHttp = new XMLHttpRequest()
+    xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/translate/" + dane.id, false)
+    xmlHttp.setRequestHeader("Accept", "application/json")
+    xmlHttp.send(JSON.stringify(lang))
+    
 }
 
 export default function Test(props)
@@ -59,6 +68,11 @@ export default function Test(props)
             <button onClick={()=> ocen(dane)}>Oceń</button>
             </form>
             </p>
+        {/* <form> */}
+        <button onClick={()=> translate(dane,"pl")}>Tłumacz na polski</button>
+        <button onClick={()=> translate(dane,"en")}>Tłumacz na angielski</button>
+        {/* </form> */}
+      
         </div>
 
     );
