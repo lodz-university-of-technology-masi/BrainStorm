@@ -25,11 +25,11 @@ export default function Routes({ appProps }) {
       <AuthorizedRecruiterRoute path="/test/:id" exact component={Test} appProps={appProps}/>
       <AuthorizedRecruiterRoute path="/test/edit/:id" exact component={EditTest} appProps={appProps}/>
       <AuthorizedCandidateRoute path="/candidate" exact component={Candidate} appProps={appProps}/>
-       <AuthorizedRecruiterRoute path="/admin/candidates" exact component={Candidates} appProps={appProps}/>
+      <AuthorizedRecruiterRoute path="/admin/candidates" exact component={Candidates} appProps={appProps}/>
       <AuthorizedCandidateRoute path="/candidate/solve/:id" exact component={SolveTest} appProps={appProps}/>
       <AuthorizedCandidateRoute path="/candidate/rate/:id" exact component={Rate} appProps={appProps}/>
       <AuthorizedRecruiterRoute path="/admin/candidates/add" exact component={AddCandidate} appProps={appProps} />
-      <AuthorizedRecruiterRoute Route exact path="/admin/createTest" component={(props) => <CreateTest {...props}/>} />
+      <AuthorizedRecruiterRoute path="/admin/createTest" exact component={CreateTest} appProps={appProps} />
      <Route component={NotFound} /> { /* Finally, catch all unmatched routes */ }
     </Switch>
   );
