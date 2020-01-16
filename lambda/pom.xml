@@ -35,6 +35,12 @@
             <artifactId>aws-java-sdk-core</artifactId>
             <version>1.11.699</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
+        </dependency>
     </dependencies>
 
     <build>
