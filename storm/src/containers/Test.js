@@ -17,6 +17,7 @@ function translate(dane,lang){
     xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/translate/" + dane.id, false)
     xmlHttp.setRequestHeader("Accept", "application/json")
     xmlHttp.send(JSON.stringify(lang))
+    window.location.reload()
     
 }
 
@@ -68,10 +69,10 @@ export default function Test(props)
             <button onClick={()=> ocen(dane)}>Oceń</button>
             </form>
             </p>
-        {/* <form> */}
+        <form>
         <button onClick={()=> translate(dane,"pl")}>Tłumacz na polski</button>
         <button onClick={()=> translate(dane,"en")}>Tłumacz na angielski</button>
-        {/* </form> */}
+        </form>
       
         </div>
 

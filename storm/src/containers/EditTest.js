@@ -22,6 +22,7 @@ class Edit extends React.Component {
         xmlHttp.setRequestHeader("Accept", "application/json")
         console.log(d)
         xmlHttp.send(d)
+        console.log("czesc")
         let path = `/admin` ;
         this.props.history.push({
             pathname: path,
@@ -52,9 +53,16 @@ class Edit extends React.Component {
                             <td><input type="text" onChange={event => { question.context = event.target.value}} defaultValue={question.context}></input></td>
                             <td><input type="text" onChange={event => { question.question = event.target.value}} defaultValue={question.question}></input></td>
                             <td>{question.answer.map((answ,idx)=>{
+                                if(idx == 0){
                                 return (
                                     <td>{answ}|</td>
-                                )
+                                    )
+                                }
+                                else{
+                                    return(
+                                    <td><input type="text" onChange={event => { answ = event.target.value}} defaultValue={answ}></input></td>
+                                    )
+                                }
                             })}</td>
                             </tr>
                         )

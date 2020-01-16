@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 
 class AddCandidate extends React.Component {
@@ -23,6 +24,7 @@ class AddCandidate extends React.Component {
         });
     }
 
+
     handleChangeName = (e) => {
         this.state.userName = e.target.value
     }
@@ -43,12 +45,13 @@ class AddCandidate extends React.Component {
     render(){
         return(
             <div>
-             <form onChange={this.handleChange}>
-             <input type="text" defaultValue={this.state.value}/>
-             <input type="password" defaultValue={this.state.value} minLength="6"/>
+             <form onChange={this.handleChange}><label for="u">Użytkownik </label>
+             <input id="u" type="text" defaultValue={this.state.value}/>
+             <label for="h">Hasło </label>
+             <input id="h" type="password" defaultValue={this.state.value} minLength="6"/>
              <button onClick={this.routeChange}>Dodaj</button>
              </form>
-             
+             <td><Link to={"/admin/candidates"}>Cofnij</Link></td>
             </div>
             )
         }
