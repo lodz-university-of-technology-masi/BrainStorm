@@ -39,7 +39,7 @@ class Form extends React.Component {
         event.preventDefault()
     }
 
-    addToBase = () => {
+    addToBase = (lang) => {
         const test = {id: "", candidate: "",points:"-1", title: "test rekrutacyjny", questions: []}
         test.id = this.state.test_id
         test.candidate = this.state.candidate
@@ -55,6 +55,12 @@ class Form extends React.Component {
         xmlHttp.setRequestHeader("Accept", "application/json")
         console.log(d)
         xmlHttp.send(d)
+        if(lang == "en"){
+            var xmlHttp = new XMLHttpRequest()
+            xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/translate/" + test.id, false)
+            xmlHttp.setRequestHeader("Accept", "application/json")
+            xmlHttp.send(JSON.stringify(lang))
+        }
         window.location.reload()
 
     }
@@ -130,7 +136,8 @@ class Form extends React.Component {
                         )
                     })
                 }
-                <button onClick={this.addToBase}>Dodaj</button>
+                <button onClick={()=> this.addToBase("pl")}>Dodaj</button>
+                <button onClick={()=> this.addToBase("en")}>Dodaj po angielsku</button>
                 <p>Importuj plik z testem</p>
                 <CSVReader onFileLoaded={data => this.readFile(data)}/>
                 <p><Link to={"/admin"}>Powrot</Link></p>
