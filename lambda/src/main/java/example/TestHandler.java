@@ -1,18 +1,14 @@
 package example;
 
-import com.amazonaws.services.cognitoidp.model.ListUsersRequest;
-import com.amazonaws.services.cognitoidp.model.UserType;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.dynamodbv2.*;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.amazonaws.services.cognitoidp.*;
+
 
 
 import java.io.IOException;
@@ -65,6 +61,48 @@ public class TestHandler {
             res.body = ex.getMessage();
             return res;
 
+        }
+    }
+
+    public Response translateTest(Map<String, Object> input, Context context) {
+        Response res = new Response();
+
+        try {
+            Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
+            Test test = mapper.load(Test.class, (String) params.get("id"));
+            String body = (String)input.get("body");
+            String toLang = "en";
+            String fromLang = "pl";
+            if(body.equals("\"pl\"")){
+                toLang = "pl";
+                fromLang = "en";
+            }
+            for (Question question: test.getQuestions()
+                 ) {
+                question.setQuestion(Translator.translateText(question.getQuestion(),fromLang,toLang));
+                List<String> ans = new ArrayList<>();
+                int i = 0;
+                for (String answer: question.getAnswer()
+                     ) {
+                    if(!test.getPoints().equals("-1") && !test.getPoints().equals("-2") || i != 0) {
+                        ans.add(Translator.translateText(answer, fromLang, toLang));
+                    }
+                    else{
+                        ans.add(" ");
+                    }
+                    i++;
+                }
+                question.setAnswer(ans);
+            }
+            mapper.save(test);
+            res.body = objmapper.writeValueAsString(test);
+            res.headers.put("Content-type", "application/json");
+            res.headers.put("Access-Control-Allow-Origin","*");
+            return res;
+        }
+        catch (Exception   ex) {
+            res.body = ex.getMessage();
+            return res;
         }
     }
 
