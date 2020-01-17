@@ -15,6 +15,7 @@ export default function Rate(props)
         <h1>Twój wynik to: {dane.points}</h1>
             <p>Identyfikator testu: {dane.id}</p>
             <p>Kandydat: {dane.candidate}</p>
+            <p>Rekruter: {dane.recruter}</p>
             <p>Nazwa testu:{dane.title}</p>
         <h3 class = "name">Pytania</h3>
         <table class = "table" style={{backgroundColor: "lightgray"}}>

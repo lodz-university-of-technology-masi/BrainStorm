@@ -1,13 +1,26 @@
 import React from "react"
 import {Link} from "react-router-dom";
 import CSVReader from 'react-csv-reader';
+import {Auth} from "aws-amplify";
 
 class Form extends React.Component {
-    state = {
-        test: [],
-        candidate: "",
-        test_id: ""
+    constructor(props) {
+        super(props);
+        this.state = {test: [],
+            candidate: "",
+            test_id: "-1",
+            username: ""};
+
+        // this.goToCandidatesPage = this.goToCandidatesPage.bind(this);
+        Auth.currentAuthenticatedUser().then(user => {
+            //console.log(user.username);
+            this.setState({username: user.username});
+            
+        });
     }
+
+    
+    
 
 
     addQuestion = () => {
@@ -40,7 +53,8 @@ class Form extends React.Component {
     }
 
     addToBase = (lang) => {
-        const test = {id: "", candidate: "",points:"-1", title: "test rekrutacyjny", questions: []}
+        console.log(this.state.username)
+        const test = {id: "", candidate: "",recruter: this.state.username,points:"-1", title: "test rekrutacyjny", questions: []}
         test.id = this.state.test_id
         test.candidate = this.state.candidate
         this.state.test.map((t, idx) => {
@@ -55,9 +69,10 @@ class Form extends React.Component {
         xmlHttp.setRequestHeader("Accept", "application/json")
         console.log(d)
         xmlHttp.send(d)
+        const tt = JSON.parse(xmlHttp.response)
         if(lang == "en"){
             var xmlHttp = new XMLHttpRequest()
-            xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/translate/" + test.id, false)
+            xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/translate/" + tt.id, false)
             xmlHttp.setRequestHeader("Accept", "application/json")
             xmlHttp.send(JSON.stringify(lang))
         }
@@ -92,8 +107,8 @@ class Form extends React.Component {
             <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                 <label htmlFor="author">Kandydat</label>
                 <input type="text" name="author" id="author" defaultValue={candidate} onChange={e => this.state.candidate = e.target.value}/>
-                <label htmlFor="test_id">Test id</label>
-                <input type="text" name="test_id" id="test_id" defaultValue={test_id}/>
+                {/* <label htmlFor="test_id">Test id</label>
+                <input type="text" name="test_id" id="test_id" defaultValue={test_id}/> */}
                 <p>
                     <button onClick={this.addQuestion}>Dodaj nowe pytanie otwarte</button>
                 </p>

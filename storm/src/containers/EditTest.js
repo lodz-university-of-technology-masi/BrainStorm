@@ -35,6 +35,7 @@ class Edit extends React.Component {
             <div>
                 <h1>Test</h1>
             <p>Identyfikator testu:{this.state.dane.id}</p>
+            <p>Rekruter:  <input type="text" onChange={event => { this.state.dane.recruter = event.target.value}} defaultValue={this.state.dane.recruter}></input></p>
             <p>Kandydat: <input type="text" onChange={event => { this.state.dane.candidate = event.target.value}} defaultValue={this.state.dane.candidate}></input></p>
             <p>Nazwa testu:<input type="text" onChange={event => { this.state.dane.title = event.target.value}} defaultValue={this.state.dane.title}></input></p>
         <h3 class = "name">Pytania</h3>

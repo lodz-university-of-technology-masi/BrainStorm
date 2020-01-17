@@ -60,6 +60,7 @@ class CandidateTests extends React.Component{
     
     getAssignmentTable = () => {
         var xmlHttp = new XMLHttpRequest();
+        console.log(this.state.username)
         xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + this.state.username, false);
         // xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidate/" + USERNAME, false);	
         xmlHttp.setRequestHeader("Accept", "application/json");

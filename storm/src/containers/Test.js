@@ -35,6 +35,7 @@ export default function Test(props)
         <h1>Test</h1>
             <p>Identyfikator testu:{dane.id}</p>
             <p>Kandydat: {dane.candidate}</p>
+            <p>Rekruter: {dane.recruter}</p>
             <p>Nazwa testu:{dane.title}</p>
             <p>Punkty: {dane.points}</p>
         <h3 class = "name">Pytania</h3>
