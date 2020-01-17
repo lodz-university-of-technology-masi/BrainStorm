@@ -82,9 +82,8 @@ class Form extends React.Component {
 
     readFile = (data) => {
         this.setState({})
-        this.state.test_id = data[0][0]
-        this.state.candidate = data[1][0]
-        for (let i = 2; i < data.length; i++) {
+        this.state.candidate = data[0][0]
+        for (let i = 1; i < data.length; i++) {
             if (data[i][0] === 'O') {
                 this.state.test.push({question: data[i][1], answer: [" "]})
             } else {
