@@ -26,8 +26,12 @@ public class TestHandler {
 
     public Response addTest(Map<String, Object> input, Context context) throws IOException {
         Response res = new Response();
+        Random random = new Random();
         String body = (String)input.get("body");
         Test test = objmapper.readValue(body, Test.class);
+        if(test.getId().equals("-1")) {
+            test.setId("" + random.nextInt(Integer.MAX_VALUE));
+        }
         mapper.save(test);
         res.body = objmapper.writeValueAsString(test);
 		 res.headers.put("Content-type", "application/json");
@@ -110,7 +114,6 @@ public class TestHandler {
 
         Response res = new Response();
         Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
-        res.body = (String)params.get("candidate");
         String candidate = (String)params.get("candidate");
         DynamoDBScanExpression exp = new DynamoDBScanExpression();
         List<Test> test = mapper.scan(Test.class, exp);
@@ -128,40 +131,61 @@ public class TestHandler {
         return res;
     }
 
-    public Response getCandidateTests(Map<String, Object> input, Context context) {
+    public Response recruterTests(Map<String, Object> input, Context context) throws JsonProcessingException {
 
         Response res = new Response();
-
-        try {
-//            Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
-//            objmapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-//            String candidate = (String) params.get("candidate");
-            String candidate = (String)input.get("body");
-
-            DynamoDBScanExpression exp = new DynamoDBScanExpression();
-            List<Test> test = mapper.scan(Test.class, exp);
-            List<Test> candidateTests = new LinkedList<>();
-            for (Test t  : test) {
-                if(t.getCandidate().equals(candidate)){
-                    candidateTests.add(t);
+        Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
+        String recruter = (String)params.get("recruter");
+        DynamoDBScanExpression exp = new DynamoDBScanExpression();
+        List<Test> test = mapper.scan(Test.class, exp);
+        List<Test> recruterTests = new LinkedList<>();
+        for (Test t  : test) {
+            if(t.getRecruter() != null){
+                if(t.getRecruter().equals(recruter)){
+                    recruterTests.add(t);
                 }
             }
-            res.body = objmapper.writeValueAsString(candidateTests);
-            res.headers.put("Content-type", "application/json");
-            res.headers.put("Access-Control-Allow-Origin","*");
-            return res;
         }
-        catch (JsonProcessingException ex) {
-            res.body = ex.getMessage();
-            return res;
-
-        }
-        catch (NullPointerException ex){
-            res.body = input.toString();
-            res.body = (String)input.get("pathParameters");
-            return res;
-        }
+        res.body = objmapper.writeValueAsString(recruterTests);
+        res.headers.put("Content-type", "application/json");
+        res.headers.put("Access-Control-Allow-Origin","*");
+        return res;
     }
+
+//    public Response getCandidateTests(Map<String, Object> input, Context context) {
+//
+//        Response res = new Response();
+//
+//        try {
+////            Map<String, Object> params = (LinkedHashMap<String, Object>) input.get("pathParameters");
+////            objmapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+////            String candidate = (String) params.get("candidate");
+//            String candidate = (String)input.get("body");
+//
+//            DynamoDBScanExpression exp = new DynamoDBScanExpression();
+//            List<Test> test = mapper.scan(Test.class, exp);
+//            List<Test> candidateTests = new LinkedList<>();
+//            for (Test t  : test) {
+//                if(t.getCandidate().equals(candidate)){
+//                    candidateTests.add(t);
+//                }
+//            }
+//            res.body = objmapper.writeValueAsString(candidateTests);
+//            res.headers.put("Content-type", "application/json");
+//            res.headers.put("Access-Control-Allow-Origin","*");
+//            return res;
+//        }
+//        catch (JsonProcessingException ex) {
+//            res.body = ex.getMessage();
+//            return res;
+//
+//        }
+//        catch (NullPointerException ex){
+//            res.body = input.toString();
+//            res.body = (String)input.get("pathParameters");
+//            return res;
+//        }
+//    }
 
 
     public Response getAllTests(Map<String, Object> input, Context context) throws JsonProcessingException {
