@@ -84,7 +84,7 @@ public class TestHandler {
                 int i = 0;
                 for (String answer: question.getAnswer()
                      ) {
-                    if(!test.getPoints().equals("-1") && !test.getPoints().equals("-2") || i != 0) {
+                    if(!test.getPoints().equals("-1") || i != 0) {
                         ans.add(Translator.translateText(answer, fromLang, toLang));
                     }
                     else{
