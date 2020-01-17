@@ -10,10 +10,6 @@ class Candidates extends React.Component {
         xmlHttp.setRequestHeader("Accept", "application/json")
         xmlHttp.send(null)
         this.routeChange = this.routeChange.bind(this);
-        // console.log(dane)
-        //const dane = JSON.parse(xmlHttp.response)
-
-        //console.log(this.state.iterator)
         this.state = {dane: JSON.parse(xmlHttp.response)};
     }
 
@@ -25,7 +21,6 @@ class Candidates extends React.Component {
     xmlHttp.setRequestHeader("Accept", "application/json")
     xmlHttp.send("{\"userName\":\""+name+"\"}")
     window.location.reload()
-    //console.log("{\"userName\":\""+name+"\"}")
 }
     
      routeChange(){

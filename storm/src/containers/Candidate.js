@@ -11,10 +11,8 @@ class CandidateTests extends React.Component{
             dane: "",
         }
         Auth.currentAuthenticatedUser().then(user => {
-                //console.log(user.username);
                 this.setState({username: user.username});
                 this.getAssignmentTable();
-                //console.log(this.state.dane);
             });
     }
     

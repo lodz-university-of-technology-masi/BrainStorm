@@ -8,9 +8,7 @@ class SolveTest extends React.Component {
         xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/a/test/" + props.match.params.id, false)
         xmlHttp.setRequestHeader("Accept", "application/json")
         xmlHttp.send(null)
-        //const dane = JSON.parse(xmlHttp.response)
 
-        //console.log(this.state.iterator)
         this.state = {id: props.match.params.id, iterator: 0, dane: JSON.parse(xmlHttp.response), flaga: true};
     }
 

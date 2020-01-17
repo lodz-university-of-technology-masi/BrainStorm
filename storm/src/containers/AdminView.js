@@ -5,15 +5,7 @@ import {Auth} from "aws-amplify";
 
 
 
-
-
-
  const list = [];
-// var xmlHttp = new XMLHttpRequest()
-// xmlHttp.open("GET", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/a", false)	
-// xmlHttp.setRequestHeader("Accept", "application/json")
-// xmlHttp.send(null)
-// const dane = JSON.parse(xmlHttp.response)
 
 
 class AdminView extends React.Component {
@@ -24,7 +16,6 @@ class AdminView extends React.Component {
         this.routeChange = this.routeChange.bind(this);
         this.goToCandidatesPage = this.goToCandidatesPage.bind(this);
         Auth.currentAuthenticatedUser().then(user => {
-            //console.log(user.username);
             this.setState({username: user.username});
             this.getAssignmentTable();
         });

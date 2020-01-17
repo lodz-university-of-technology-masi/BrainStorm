@@ -14,7 +14,6 @@ class AddCandidate extends React.Component {
         var xmlHttp = new XMLHttpRequest()
         xmlHttp.open("POST", "https://f628s6t6a9.execute-api.us-east-1.amazonaws.com/ss/candidates/add", false)	
         xmlHttp.setRequestHeader("Accept", "application/json")
-        // console.log(user)
         xmlHttp.send(user)
 
         let path = `/admin/candidates` ;
