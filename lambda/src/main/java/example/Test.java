@@ -10,6 +10,7 @@ public class Test {
 
     private String id;
     private String candidate;
+    private String recruter;
     private String title;
     private List<Question> questions = new LinkedList<Question>();
     private String points;
@@ -18,9 +19,10 @@ public class Test {
 
     public Test(){}
 
-    public Test(String id, String candidate, String title, List<Question> questions,String points) {
+    public Test(String id, String candidate, String recruter, String title, List<Question> questions, String points) {
         this.id = id;
         this.candidate = candidate;
+        this.recruter = recruter;
         this.title = title;
         this.questions = questions;
         this.points = points;
@@ -86,5 +88,11 @@ public class Test {
         Test t = findTest(id, mapper);
         mapper.delete(t);
     }
-
+    @DynamoDBAttribute(attributeName="recruter")
+    public String getRecruter() {
+        return recruter;
+    }
+    public void setRecruter(String recruter) {
+        this.recruter = recruter;
+    }
 }

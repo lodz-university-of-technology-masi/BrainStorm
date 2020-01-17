@@ -94,16 +94,13 @@ public class CognitoHandler{
                 .withPassword(user.getPassword())
                 .withPermanent(true);
         cognito.adminSetUserPassword(passwordRequest);
-//        AdminAddUserToGroupRequest group = new AdminAddUserToGroupRequest()
-//                .withUserPoolId("us-east-1_PqkszmvwY")
-//                .withGroupName("Candidate")
-//                .withUsername(user.getUserName());
-//        cognito.adminAddUserToGroup(group);
         res.body = "Dodano " + user.getUserName();
         res.headers.put("Content-type", "application/json");
         res.headers.put("Access-Control-Allow-Origin","*");
         return res;
     }
+
+
 
     public Response deleteUsers(Map<String, Object> input, Context context) throws IOException {
         Response res = new Response();
